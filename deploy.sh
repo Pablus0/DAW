@@ -29,9 +29,10 @@ mkdir -p $BUILD_DIR/WEB-INF/classes
 
 # ===== 3. Compilar el servlet Java =====
 echo "⚙️ Compilando código Java..."
+# Verifica que solo compile archivos Java válidos
 javac -classpath $SERVLET_API \
       -d $BUILD_DIR/WEB-INF/classes \
-      $(find $SRC_DIR -name "*.java") || { echo "❌ Error de compilación"; exit 1; }
+      $(find $SRC_DIR -name "*.java" ! -name "*.txt") || { echo "❌ Error de compilación"; exit 1; }
 
 # ===== 4. Generar web.xml dinámicamente =====
 echo "📝 Generando web.xml..."
@@ -74,3 +75,4 @@ else
 fi
 
 echo "🎯 Despliegue finalizado con éxito"
+
